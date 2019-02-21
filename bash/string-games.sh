@@ -44,9 +44,13 @@ echo "=================="
 
 echo "======the lines that end with something other than a period in the text from the somesillytext variable"
 grep -v '^.' <<< "$somesillytext"
+echo "=========================="
+
 
 echo "==the lines that are blank or only contain spaces or tabs in the text from the somesillytext variable=="
 grep '[[:blank:]]' <<< "$somesillytext"
+echo "=========================="
+
 
 # this 'tr' command will remove extra spaces from the text in the somesillytext variable
 # TASK 6: Modify the tr command to turn lower case characters into upper case characters in the text from the somesillytext variable
