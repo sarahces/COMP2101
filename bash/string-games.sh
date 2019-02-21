@@ -54,7 +54,7 @@ echo "========Extra spaces removed========"
 tr -s '' <<< "$somesillytext"
 echo "=========================="
 echo "====lowercase to uppercase=="
-tr a-z A-Z <<<"$somesillytext"
+tr a-z A-Z <<< "$somesillytext"
 echo "============================="
 
 # this pipeline runs ip to show configured ip addresses in brief mode
