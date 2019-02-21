@@ -43,7 +43,7 @@ echo "=================="
 
 
 echo "======the lines that end with something other than a period in the text from the somesillytext variable"
-grep <<< "$somesillytext"
+grep -v '^.' <<< "$somesillytext"
 
 echo "==the lines that are blank or only contain spaces or tabs in the text from the somesillytext variable=="
 grep '[[:blank:]]' <<< "$somesillytext"
