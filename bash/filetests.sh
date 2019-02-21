@@ -3,16 +3,22 @@
 
 # Test for the existence of the /etc/resolv.conf file
 # TASK 1: Add a test to see if the /etc/resolv.conf file is a regular file
+[ -f /etc/resolv.conf ] && echo "/etc/resolv.conf is a regular file" || echo "/etc/resolv.conf is not a regular file"
 # TASK 2: Add a test to see if the /etc/resolv.conf file is a symbolic link
+[ -L /etc/resolv.conf ] && echo "/etc/resolv.conf is a symbolic link" || echo "/etc/resolv.conf is not a symbolic link"
 # TASK 3: Add a test to see if the /etc/resolv.conf file is a directory
+[ -d /etc/resolv.conf ] && echo "/etc/resolv.conf is a directory" || echo "/etc/resolv.conf is not a directory"
 # TASK 4: Add a test to see if the /etc/resolv.conf file is readable
-# TASK 5: Add a test to see if the /etc/resolv.conf file is writable
+[ -r /etc/resolv.conf ] && echo "/etc/resolv.conf is readable" || echo "/etc/resolv.conf is not readable"
+ # TASK 5: Add a test to see if the /etc/resolv.conf file is writable
+[ -w /etc/resolv.conf ] && echo "/etc/resolv.conf is writable" || echo "/etc/resolv.conf is not writable"
 # TASK 6: Add a test to see if the /etc/resolv.conf file is executable
 [ -e /etc/resolv.conf ] && echo "/etc/resolv.conf exists" || echo "/etc/resolv.conf does not exist"
-
 # Tests if /tmp is a directory
 # TASK 4: Add a test to see if the /tmp directory is readable
+[ -r /tmp ] && echo "/tmp is a readable directory" || echo "/tmp is not a readable directory"
 # TASK 5: Add a test to see if the /tmp directory is writable
+[ -w /tmp ] && echo "/tmp is a writable directory" || echo "/tmp is not a writable directory"
 # TASK 6: Add a test to see if the /tmp directory can be accessed
 [ -d /tmp ] && echo "/tmp is a directory" || echo "/tmp is not a directory"
 
