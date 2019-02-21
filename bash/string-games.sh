@@ -47,7 +47,7 @@ grep -v '^.' <<< "$somesillytext"
 echo "=========================="
 
 
-echo "==the lines that are blank or only contain spaces or tabs in the text from the somesillytext variable=="
+echo "=====the lines that are blank or only contain spaces or tabs in the text from the somesillytext variable======"
 grep '[[:blank:]]' <<< "$somesillytext"
 echo "=========================="
 
