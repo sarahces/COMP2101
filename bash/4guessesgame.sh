@@ -39,11 +39,13 @@ do # loop around until they get it right
       else
           echo "You won the Guess! Have a Dairymilk."
           exit
-        fi
-        if [ $i -eq 4 ]
-        then
+      fi
+      if [ $i -eq 4 ]
+      then
           echo "Sorry your guess is over ."
           exit
+      else
+          echo "You have left "$((4-"$i"))" more guesses"
       fi
   else
       echo "Please Enter a Number Between 1 to 10. Try Again !"
