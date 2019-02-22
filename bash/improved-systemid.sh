@@ -17,6 +17,7 @@
 for interface in $(ifconfig | cut -d ' ' -f1| tr ':' '\n' | awk NF)
 do
 
+
 ################
 # Data Gathering
 ################
@@ -28,37 +29,35 @@ my_hostname=$(hostname)
 # the LAN name is looked up using the LAN address in case it is different from the system name
 # the lan address is pulled out of the ip address command output
 # we are assuming there is only one IPV4 address assigned to this interface
-eno1_ipv4_address=$(ip a s eno1|awk -F '[/ ]+' '/inet /{print $3}')
-eno1_ipv4_hostname=$(getent hosts $eno1_ipv4_address | awk '{print $2}')
+interface_ipv4_address=$(ip a s $interface|awk -F '[/ ]+' '/inet /{print $3}')
+interface_ipv4_hostname=$(getent hosts $interface_ipv4_address | awk '{print $2}')
 
 # the default route can be found in the route table normally
 # the router name is obtained with getent
 default_router_address=$(ip r s default| cut -d ' ' -f 3)
 default_router_name=$(getent hosts $default_router_address|awk '{print $2}')
-
 # the network address can be easily pulled from the route table with the ip route list command
 # the network name can be looked up with the getent command
-eno1_network_address=$(ip route list dev eno1 scope link|cut -d ' ' -f 1)
-eno1_network_number=$(cut -d / -f 1 <<<"$eno1_network_address")
-eno1_network_name=$(getent networks $eno1_network_number|awk '{print $1}')
+interface_network_address=$(ip route list dev $interface scope link|cut -d ' ' -f 1|sed -n 2p)
+interface_network_number=$(cut -d / -f 1 <<<"$interface_network_address")
+interface_network_name=$(getent networks $interface_network_number|head -n 1|awk '{print $1}')
 
 # finding external information relies on curl being installed and relies on live internet connection
-external_address=$(curl -s icanhazip.com)
-external_name=$(getent hosts $external_address | awk '{print $2}')
-
+external_address=$(curl -s icanhazip.com|awk '{print $1}')
+external_name=$(getent hosts $external_address |awk '{print $2}')
 
 echo "
-System Identification Summary ($eno1)
+System Identification Summary ($interface)
 -----------------------------
 Hostname      : $my_hostname
 Default Router: $default_router_address
 Router Name   : $default_router_name
 External IP   : $external_address
 External Name : $external_name
-
-Interface eno1 Address         : $eno1_ipv4_address
-Interface eno1 Name            : $eno1_ipv4_hostname
-Interface eno1 Network Address : $eno1_network_address
-Interface eno1 Network Name    : $eno1_network_name
+Interface Address         : $interface_ipv4_address
+Interface Name            : $interface_ipv4_hostname
+Interface Network Address : $interface_network_address
+Interface Network Name    : $interface_network_name
 "
+
 done
